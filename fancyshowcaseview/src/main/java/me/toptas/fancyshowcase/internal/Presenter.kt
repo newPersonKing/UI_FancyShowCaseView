@@ -29,26 +29,31 @@ internal class Presenter(private val pref: SharedPref,
     var viewRadius = 0
 
     fun initialize() {
+        // 设置背景颜色 可以动态设置 没设置 使用默认值
         props.backgroundColor = if (props.backgroundColor != 0)
             props.backgroundColor
         else
             device.currentBackgroundColor()
+        // title 展示位置
         props.titleGravity = if (props.titleGravity >= 0) props.titleGravity else Gravity.CENTER
+        // title 样式
         props.titleStyle = if (props.titleStyle != 0) props.titleStyle else R.style.FancyShowCaseDefaultTitleStyle
 
-
+        // 屏幕中心
         centerX = device.deviceWidth() / 2
         centerY = device.deviceHeight() / 2
     }
 
 
     fun show(onShow: () -> Unit/*, waitForLayout: () -> Unit*/) {
+        // 1 props.fancyId默认是null
         if (pref.isShownBefore(props.fancyId)) {
             props.dismissListener?.onSkipped(props.fancyId)
             props.queueListener?.onNext()
             return
         }
         // if view is not laid out get, width/height values in onGlobalLayout
+        // 1 rops.focusedView 默认是null
         if (props.focusedView?.cantFocus() == true) {
             props.focusedView?.waitForLayout { onShow() }
         } else {
@@ -59,6 +64,7 @@ internal class Presenter(private val pref: SharedPref,
     fun calculations() {
         val deviceWidth = device.deviceWidth()
         val deviceHeight = device.deviceHeight()
+        // 计算背景的尺寸
         bitmapWidth = deviceWidth
         bitmapHeight = deviceHeight - if (props.fitSystemWindows) 0 else device.getStatusBarHeight()
         if (props.focusedView != null) {

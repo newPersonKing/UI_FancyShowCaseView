@@ -2,8 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.faruktoptas'
-
 android {
     compileSdkVersion compile_sdk_version
 
@@ -42,10 +40,4 @@ dependencies {
 
 repositories {
     mavenCentral()
-}
-
-tasks.withType(Test) {
-    testLogging {
-        events "started", "passed", "skipped", "failed"
-    }
 }

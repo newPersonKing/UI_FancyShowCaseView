@@ -1,3 +1,12 @@
+___
+知识点：  
+1 根view中添加自定义view
+2 OnGlobalLayoutListener监听 获取view的尺寸 以及做动画  
+3 PorterDuffXfermode 绘制透明效果  
+4 自定义setOnTouchListener 制造事件传递
+___
+
+
 ![FancyShowCaseView](https://user-images.githubusercontent.com/1595227/56747421-9aafc580-6786-11e9-9344-e3216f7aa660.png)
 <p align="center">An easy-to-use customizable show case view with circular reveal animation.</p>
 <p align="center">

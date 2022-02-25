@@ -102,11 +102,14 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
         props = _props
         activity = _activity
         androidProps = _androidProps
+        // 当前页面信息存储
         val deviceParams = DeviceParamsImpl(activity, this)
+        // preferences 村粗当前页面 引导页展示情况
         presenter = Presenter(preferences(activity), deviceParams, props)
         animationPresenter = AnimationPresenter(androidProps, deviceParams)
 
         presenter.initialize()
+        // 屏幕中心
         mCenterX = presenter.centerX
         mCenterY = presenter.centerY
     }
@@ -119,6 +122,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     private fun focus() {
+        // 计算背景尺寸 以及焦点view的处理
         presenter.calculations()
         mRoot = activity.rootView()
         mRoot?.postDelayed(Runnable {
@@ -126,6 +130,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
                 return@Runnable
             }
             val visibleView = activity.attachedShowCase()
+            // 1 isClickable 默认应该是true
             isClickable = !props.enableTouchOnFocusedView
             if (visibleView == null) {
                 tag = CONTAINER_TAG
